@@ -1,0 +1,28 @@
+{
+  "name": "Java Developer",
+  "technical": [
+    "Java Core",
+    "Java Advanced",
+    "Spring Boot",
+    "JPA / Hibernate",
+    "DBs relational",
+    "DBs no sql",
+    "Security",
+    "Cloud",
+    "Personal projects",
+    "Last work project",
+    "DevOps",
+    "Web development"
+  ],
+  "non_technical": [
+    "Potential & Motivation a.k.a Drive",
+    "Communication",
+    "Self impression"
+  ],
+  "personal_assessment": [
+    "Overall impression",
+    "Cultural fit",
+    "Growth potential"
+  ],
+  "overall_levels": ["Junior", "Medior", "Senior", "Lead"]
+}

@@ -2,6 +2,17 @@
 
 A CLI tool that generates technical interview feedback reports from free-text notes. Write your interview notes, run the tool, and get a structured PDF report with scores (1-5) and comments for each assessment area.
 
+## Web UI
+
+A browser-based version is available at [GitHub Pages](https://tomas-blanarik-visma.github.io/AI-Feedback/). No installation required.
+
+- **Select a profile** — C#, Java, Architecture, Frontend (Angular/React/Vue), or Manager
+- **Paste or upload** interview notes
+- **Choose LLM mode** — Browser model (free, ~2GB download on first use) or your own API key
+- **Generate PDF** — Download the report directly
+
+Runs entirely in the browser. API keys are stored locally and never sent anywhere except your chosen endpoint.
+
 ## Setup
 
 ### Download (no install needed)

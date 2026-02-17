@@ -1,0 +1,28 @@
+{
+  "name": "Architecture",
+  "technical": [
+    "System design",
+    "Distributed systems",
+    "API design",
+    "Data modeling",
+    "Performance & scalability",
+    "Security architecture",
+    "Cloud architecture",
+    "Event-driven design",
+    "Microservices",
+    "Technical leadership",
+    "Last work project",
+    "Documentation"
+  ],
+  "non_technical": [
+    "Potential & Motivation a.k.a Drive",
+    "Communication",
+    "Self impression"
+  ],
+  "personal_assessment": [
+    "Overall impression",
+    "Cultural fit",
+    "Growth potential"
+  ],
+  "overall_levels": ["Junior", "Medior", "Senior", "Lead"]
+}

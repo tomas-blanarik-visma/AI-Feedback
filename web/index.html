@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Feedback</title>
+  </head>
+  <body>
+    <header>
+      <h1>AI Feedback</h1>
+      <p>Generate interview feedback reports from notes</p>
+    </header>
+
+    <main>
+      <section id="settings">
+        <h2>Settings</h2>
+        <div class="field">
+          <label>LLM mode</label>
+          <div class="toggle">
+            <button type="button" id="mode-browser" class="active">Browser Model</button>
+            <button type="button" id="mode-api">API Key</button>
+          </div>
+        </div>
+        <div id="api-fields" class="hidden">
+          <div class="field">
+            <label for="api-key">API Key</label>
+            <input type="password" id="api-key" placeholder="sk-..." />
+          </div>
+          <div class="field">
+            <label for="api-base">Base URL</label>
+            <input type="text" id="api-base" placeholder="https://api.openai.com/v1" />
+          </div>
+        </div>
+        <div id="webllm-status" class="status">Browser model: ~2GB download on first use. No API key needed.</div>
+      </section>
+
+      <section id="profile">
+        <h2>Profile</h2>
+        <div class="field">
+          <label for="profile-select">Assessment profile</label>
+          <select id="profile-select"></select>
+        </div>
+      </section>
+
+      <section id="input">
+        <h2>Input</h2>
+        <div class="field">
+          <label for="candidate">Candidate name</label>
+          <input type="text" id="candidate" placeholder="John Doe" required />
+        </div>
+        <div class="field">
+          <label for="notes">Interview notes</label>
+          <textarea id="notes" rows="12" placeholder="Paste or type your interview notes here..."></textarea>
+          <button type="button" id="upload-file" class="secondary">Upload file</button>
+          <input type="file" id="file-input" accept=".txt,.md" class="hidden" />
+        </div>
+      </section>
+
+      <section id="generate">
+        <button type="button" id="generate-btn" disabled>Generate PDF</button>
+        <div id="progress" class="hidden"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "Manager",
+  "technical": [
+    "Team leadership",
+    "Project management",
+    "Stakeholder management",
+    "Process improvement",
+    "Budget & planning",
+    "Hiring & talent",
+    "Conflict resolution",
+    "Strategic thinking",
+    "Last work project",
+    "Tools & methodologies",
+    "Reporting",
+    "Change management"
+  ],
+  "non_technical": [
+    "Potential & Motivation a.k.a Drive",
+    "Communication",
+    "Self impression"
+  ],
+  "personal_assessment": [
+    "Overall impression",
+    "Cultural fit",
+    "Growth potential"
+  ],
+  "overall_levels": ["Junior", "Medior", "Senior", "Lead"]
+}

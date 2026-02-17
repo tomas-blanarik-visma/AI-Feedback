@@ -1,5 +1,6 @@
 .env
 .venv/
+node_modules/
 *.pyc
 __pycache__/
 *.egg-info/
@@ -10,3 +11,4 @@ build/
 !template/*.pdf
 /output
 /template
+/web/node_modules       

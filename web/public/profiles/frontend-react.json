@@ -1,0 +1,28 @@
+{
+  "name": "Frontend - React",
+  "technical": [
+    "JavaScript / TypeScript",
+    "React",
+    "Hooks",
+    "HTML / CSS",
+    "Responsive design",
+    "State management",
+    "Testing",
+    "Build tools",
+    "Personal projects",
+    "Last work project",
+    "Accessibility",
+    "Performance"
+  ],
+  "non_technical": [
+    "Potential & Motivation a.k.a Drive",
+    "Communication",
+    "Self impression"
+  ],
+  "personal_assessment": [
+    "Overall impression",
+    "Cultural fit",
+    "Growth potential"
+  ],
+  "overall_levels": ["Junior", "Medior", "Senior", "Lead"]
+}
