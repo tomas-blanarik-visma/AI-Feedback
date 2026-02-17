@@ -185,3 +185,17 @@ button.secondary:hover {
   font-size: 0.875rem;
   color: var(--text-muted);
 }
+
+footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  max-width: 42rem;
+}
+
+footer p {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
