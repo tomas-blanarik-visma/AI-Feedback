@@ -1,0 +1,9 @@
+Candidate showed solid C# fundamentals - understood OOP, interfaces, async/await. Intermediate level on LINQ and generics. Advanced topics like reflection and source generators were unfamiliar.
+
+Has experience with SQL Server and Entity Framework. No direct NoSQL experience but understood concepts.
+
+Basic security awareness (SQL injection, HTTPS). Some cloud exposure via Azure but limited hands-on. Has a few personal projects on GitHub. Last project was a .NET API with React frontend - described it well.
+
+Limited DevOps - knows Docker basics, no CI/CD experience. Web development experience with REST APIs. No Angular, mostly React.
+
+Good communication, asked clarifying questions. Seems motivated and eager to learn. Professional demeanor.

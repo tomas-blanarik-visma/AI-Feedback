@@ -1,0 +1,10 @@
+.env
+.venv/
+*.pyc
+__pycache__/
+*.egg-info/
+.eggs/
+dist/
+build/
+*.pdf
+!template/*.pdf

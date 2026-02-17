@@ -1,0 +1,27 @@
+Martin was nice extroverted guy who didn't impress me in the beginning of our 
+interview because I found some of his comments egotistical, but later I was proved wrong. 
+We had live coding assignment where he nicely commented on every decision, 
+took step back and rethink hi designs, he was willing to accept feedback and in 
+general had very nice attitude towards more skilled interviewers. 
+From c# perspective I think he knows how to design classes and use interfaces, 
+he basically knew and proved that he understands basics of OOP and C#, 
+therefore I would asses him with score 4 in basic area, intermediate area 
+I score with 3 points, because I saw him using LINQ and it was bit chaotic, 
+some methods he used correctly so I assume he had experience with these. 
+From advanced I assess him 2 points, because overall he proved that he understands 
+assignments and he's able to work on them  alone to some degree. 
+He showed that he's willing to learn and that he's looking for a new challenges in his work. 
+Previously he worked on Web APIs so I find that positive in regards to accepting him 
+into Idella's product suite. In general I assess him as a medior developer and in 
+case he'd be accepted then give him goals to strengthen his design skills and 
+database skills. We didn't get through NoSql databases, however he has experience with
+SQL databases and has basic understanding - I would asses him 3 points in SQL area.
+In cloud area I would asses him 3 points, because he has experience with Azure and 
+has basic understanding of cloud concepts. In personal projects area I would asses him 
+3 points, because he has experience with GitHub and has basic understanding of Git.
+In last work project area I would asses him 3 points, because he has experience with 
+React and has basic understanding of React.
+In web development area I would asses him 4 points, because he has experience with REST APIs and 
+has basic understanding of REST APIs.
+In web SPA - Angular area I would asses him N/A, because he did have experience with Angular,
+however this wasn't the main focus of our interview as we primarily focused on C#.
