@@ -7,14 +7,9 @@ from pathlib import Path
 import typer
 
 from .llm import analyze_interview_notes
-from .models import (
-    AreaScore,
-    FeedbackReport,
-    NON_TECHNICAL_AREAS,
-    OVERALL_LEVELS,
-    TECHNICAL_AREAS,
-)
+from .models import AreaScore, FeedbackReport
 from .pdf_generator import generate_pdf
+from .profile import FeedbackProfile, load_profile
 
 app = typer.Typer(help="Generate interview feedback reports from notes using AI.")
 
@@ -28,6 +23,10 @@ def _format_report_for_display(report: FeedbackReport) -> str:
     lines.append("\nNon-technical:")
     for s in report.non_technical_scores:
         lines.append(f"  {s.name}: {s.display_score} - {s.comment}")
+    if report.personal_assessment_scores:
+        lines.append("\nPersonal Assessment:")
+        for s in report.personal_assessment_scores:
+            lines.append(f"  {s.name}: {s.display_score} - {s.comment}")
     lines.append("\nOverall:")
     lines.append(f"  Level: {report.overall_level}")
     lines.append(f"  Comment: {report.overall_comment}")
@@ -41,7 +40,9 @@ def _format_report_for_display(report: FeedbackReport) -> str:
     return "\n".join(lines)
 
 
-def _interactive_review(report: FeedbackReport) -> FeedbackReport:
+def _interactive_review(
+    report: FeedbackReport, profile: FeedbackProfile
+) -> FeedbackReport:
     """Allow user to interactively adjust scores before generating PDF."""
     typer.echo(_format_report_for_display(report))
     typer.echo(
@@ -51,6 +52,7 @@ def _interactive_review(report: FeedbackReport) -> FeedbackReport:
 
     updated_technical: list[AreaScore] = []
     updated_non_technical: list[AreaScore] = []
+    updated_personal: list[AreaScore] = []
 
     def process_scores(scores: list[AreaScore], updated: list[AreaScore]) -> bool:
         """Process scores, return False if user typed 'q'."""
@@ -104,9 +106,14 @@ def _interactive_review(report: FeedbackReport) -> FeedbackReport:
         return True
 
     if process_scores(report.technical_scores, updated_technical):
-        process_scores(report.non_technical_scores, updated_non_technical)
+        if process_scores(report.non_technical_scores, updated_non_technical):
+            process_scores(report.personal_assessment_scores, updated_personal)
+        else:
+            updated_non_technical.extend(report.non_technical_scores)
+            updated_personal.extend(report.personal_assessment_scores)
     else:
         updated_non_technical.extend(report.non_technical_scores)
+        updated_personal.extend(report.personal_assessment_scores)
 
     # Overall level and comment
     level_input = typer.prompt(
@@ -115,7 +122,7 @@ def _interactive_review(report: FeedbackReport) -> FeedbackReport:
         show_default=True,
     )
     level = level_input.strip() if level_input else report.overall_level
-    if level not in OVERALL_LEVELS:
+    if level not in profile.overall_levels:
         level = report.overall_level
 
     comment_input = typer.prompt(
@@ -129,6 +136,7 @@ def _interactive_review(report: FeedbackReport) -> FeedbackReport:
         candidate_name=report.candidate_name,
         technical_scores=updated_technical,
         non_technical_scores=updated_non_technical,
+        personal_assessment_scores=updated_personal,
         overall_level=level,
         overall_comment=overall_comment,
         ai_evaluation=report.ai_evaluation,
@@ -171,6 +179,14 @@ def generate(
         "-r",
         help="Interactive mode: review and adjust scores before generating PDF",
     ),
+    config: Path | None = typer.Option(
+        None,
+        "--config",
+        "-cfg",
+        path_type=Path,
+        exists=True,
+        help="Path to feedback-config.yaml (default: feedback-config.yaml in cwd)",
+    ),
     verbose: bool = typer.Option(
         False,
         "--verbose",
@@ -191,17 +207,18 @@ def generate(
         logging.getLogger("httpcore").setLevel(logging.WARNING)
 
     notes_text = input.read_text(encoding="utf-8")
+    profile = load_profile(config)
 
     with typer.progressbar(
         length=1,
         label="Analyzing interview notes",
         show_eta=False,
     ) as progress:
-        report = analyze_interview_notes(notes_text, candidate)
+        report = analyze_interview_notes(notes_text, candidate, profile)
         progress.update(1)
 
     if review:
-        report = _interactive_review(report)
+        report = _interactive_review(report, profile)
 
     if output is not None:
         out_path = output
@@ -215,17 +232,32 @@ def generate(
 
 
 @app.command()
-def template() -> None:
+def template(
+    config: Path | None = typer.Option(
+        None,
+        "--config",
+        "-cfg",
+        path_type=Path,
+        exists=True,
+        help="Path to feedback-config.yaml (default: feedback-config.yaml in cwd)",
+    ),
+) -> None:
     """Show the assessment areas and scoring rubric."""
+    profile = load_profile(config)
     typer.echo("Interview Feedback Template - Assessment Areas\n")
     typer.echo("Scoring: 1 = worst, 5 = best\n")
     typer.echo("Technical:")
-    for area in TECHNICAL_AREAS:
+    for area in profile.technical:
         typer.echo(f"  - {area}")
     typer.echo("\nNon-technical:")
-    for area in NON_TECHNICAL_AREAS:
+    for area in profile.non_technical:
         typer.echo(f"  - {area}")
-    typer.echo("\nOverall: Level (Junior/Medior/Senior/Lead) + comment")
+    if profile.personal_assessment:
+        typer.echo("\nPersonal Assessment:")
+        for area in profile.personal_assessment:
+            typer.echo(f"  - {area}")
+    levels_str = "/".join(profile.overall_levels)
+    typer.echo(f"\nOverall: Level ({levels_str}) + comment")
 
 
 def main() -> None:

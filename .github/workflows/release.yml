@@ -59,12 +59,53 @@ jobs:
         with:
           name: feedback-windows
 
+      - name: Generate release body
+        env:
+          TAG: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          python3 -c "
+          import os
+          tag = os.environ['TAG']
+          repo = os.environ['REPO']
+          readme = f'https://github.com/{repo}/blob/{tag}/README.md'
+          commits = f'https://github.com/{repo}/commits/{tag}'
+          body = '''## AI Feedback ''' + tag + '''
+
+          CLI tool that generates technical interview feedback reports from free-text notes using AI.
+
+          ### Download
+
+          | Platform | File |
+          |----------|------|
+          | macOS | feedback-macos |
+          | Windows | feedback-windows.exe |
+
+          Download the asset for your platform from the list above.
+
+          ### Quick start
+
+          1. Download the file for your platform.
+          2. Create a `.env` file in the same folder with your API key or LM Studio config (see [README](''' + readme + ''')).
+          3. Run: `./feedback-macos generate -i notes.txt -c \"John Doe\"` (Mac) or `feedback-windows.exe generate -i notes.txt -c \"John Doe\"` (Windows).
+
+          ### Configuration
+
+          Place a `.env` file next to the executable. Copy `.env.example` from the repo or see the [README](''' + readme + ''') for details.
+
+          ### Changes
+
+          [View commits in this release](''' + commits + ''')
+          '''
+          open('release_body.md', 'w').write(body)
+          "
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
+          body_path: release_body.md
           files: |
             feedback-macos/feedback-macos
             feedback-windows/feedback-windows.exe
-          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

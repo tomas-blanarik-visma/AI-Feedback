@@ -73,6 +73,7 @@ feedback generate --input notes.txt --candidate "John Doe"
 - `--candidate` / `-c`: Candidate name for the report header
 - `--output` / `-o`: Optional output PDF path (default: `feedback-<candidate>-<date>.pdf`)
 - `--review` / `-r`: Interactive mode — review and adjust AI-generated scores before PDF generation
+- `--config` / `-cfg`: Path to feedback-config.yaml (default: feedback-config.yaml in current directory)
 
 ### Review mode
 
@@ -84,21 +85,61 @@ feedback generate --input notes.txt --candidate "Jane Smith" --review
 
 ### Show template
 
-View the assessment areas and scoring rubric:
+View the assessment areas and scoring rubric (from your config or defaults):
 
 ```bash
 feedback template
 ```
 
-## Assessment Areas
+## Configuration
+
+You can customize the report structure with a `feedback-config.yaml` file. Place it in the directory where you run the tool (or pass `--config /path/to/feedback-config.yaml`).
+
+The config defines:
+
+- **technical** — list of technical assessment areas
+- **non_technical** — list of non-technical assessment areas
+- **personal_assessment** — list of personal assessment areas (optional)
+- **overall_levels** — valid overall levels (e.g. Junior, Medior, Senior, Lead)
+
+Example:
+
+```yaml
+technical:
+  - "C# Basic"
+  - "C# Intermediate"
+  - "DBs relational"
+  # ... add or remove as needed
+
+non_technical:
+  - "Communication"
+  - "Self impression"
+
+personal_assessment:
+  - "Overall impression"
+  - "Cultural fit"
+  - "Growth potential"
+
+overall_levels:
+  - "Junior"
+  - "Medior"
+  - "Senior"
+  - "Lead"
+```
+
+If no config file exists, the tool uses built-in defaults (technical + non-technical only, no personal assessment). Copy `feedback-config.yaml` from the repo as a starting point.
+
+## Assessment Areas (default)
 
 **Technical (12):** C# Basic, C# Intermediate, C# Advanced, DBs relational, DBs no sql, Security, Cloud, Personal projects, Last work project, DevOps, Web development, Web SPA - Angular
 
 **Non-technical (3):** Potential & Motivation (Drive), Communication, Self impression
 
+**Personal Assessment (optional):** Overall impression, Cultural fit, Growth potential — add via config
+
 **Overall:** Level (Junior/Medior/Senior/Lead) + comment
 
-Scoring: 1 = worst, 5 = best. Use N/A when there is not enough data.
+Scoring: 1 = worst, 5 = best. Use N/A when there is not enough data. All areas and levels are configurable via `feedback-config.yaml`.
 
 
 ## Example workflow

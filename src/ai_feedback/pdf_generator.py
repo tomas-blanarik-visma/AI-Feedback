@@ -121,6 +121,16 @@ def generate_pdf(report: FeedbackReport, output_path: Path) -> None:
     )
     elements.append(Spacer(1, 0.5 * cm))
 
+    # Personal assessment section (conditional)
+    if report.personal_assessment_scores:
+        elements.append(Paragraph("Personal Assessment:", tech_header))
+        elements.append(
+            _create_score_table(
+                report.personal_assessment_scores, col_widths, cell_style
+            )
+        )
+        elements.append(Spacer(1, 0.5 * cm))
+
     # Overall assessment
     overall_header_style = ParagraphStyle(
         "OverallHeader",

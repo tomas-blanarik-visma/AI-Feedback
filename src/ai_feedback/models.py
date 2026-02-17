@@ -27,6 +27,8 @@ NON_TECHNICAL_AREAS = [
 
 OVERALL_LEVELS = ["Junior", "Medior", "Senior", "Lead"]
 
+PERSONAL_ASSESSMENT_AREAS: list[str] = []
+
 
 class AreaScore(BaseModel):
     """Score and comment for a single assessment area."""
@@ -53,6 +55,10 @@ class FeedbackReport(BaseModel):
     )
     non_technical_scores: list[AreaScore] = Field(
         description="Scores for non-technical assessment areas"
+    )
+    personal_assessment_scores: list[AreaScore] = Field(
+        default_factory=list,
+        description="Scores for personal assessment areas",
     )
     overall_level: str = Field(
         description="Overall level: Junior, Medior, Senior, or Lead"
