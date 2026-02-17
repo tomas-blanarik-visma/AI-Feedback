@@ -1,0 +1,23 @@
+technical:
+  - "C# Basic"
+  - "C# Intermediate"
+  - "C# Advanced"
+  - "OOP Design"
+  - "Security"
+  - "Cloud"
+  - "Last work project"
+  - "Web development"
+
+non_technical:
+  - "Self impression"
+
+personal_assessment:
+  - "Growth potential"
+
+overall_levels:
+  - "Entry"
+  - "Junior"
+  - "Medior"
+  - "Senior"
+  - "Lead"
+  - "Architect"
